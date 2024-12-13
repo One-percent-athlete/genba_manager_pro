@@ -57,7 +57,10 @@ def login_user(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            messages.success(request, (f"{user.profile} さん, お帰りなさい。"))
+            if user.profile:
+                messages.success(request, (f"{user.profile} さん, お帰りなさい。"))
+            else:
+                messages.success(request, ("お帰りなさい。"))
             return redirect("home")
         else:
             messages.success(request, ("ユーザー名、またはパスワードが違います。再度お試しください。"))
