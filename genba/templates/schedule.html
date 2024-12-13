@@ -8,7 +8,7 @@
     {% if request.user.profile.contract_type == "下請け" %}
     {% else %}
     <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg">
-        {% include 'assets/calendar.html' %}
+        {% include 'components/calendar.html' %}
     </div>
     {% endif %}
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
