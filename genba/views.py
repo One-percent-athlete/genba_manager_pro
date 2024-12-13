@@ -315,10 +315,13 @@ def export_csv(request):
     if daily_report_list:
         writer.writerow(["日時", "現場名", "取引先", "建退共", "職長", "同行者", "シフト", "場所", "開始時間", "終了時間", "高速道路乗り", "高速道路降り", "高速支払い方法", "駐車場料金", "宿泊料金", "その他支払い", "建替人", "作業内容", "連絡事項"])
         for report in daily_report_list:
+            attendees = []
+            for a in report.genba.attendees.all():
+                attendees.append(a.fullname)
             if report.kentaikyo:
-                writer.writerow([report.date_created.date(), report.genba.name, report.genba.client, "有", report.genba.head_person.fullname, report.genba.attendees.all(), report.shift, report.genba.address, report.start_time, report.end_time, report.highway_start, report.highway_end, report.highway_payment, report.parking, report.hotel, f"{report.other_payment, report.other_payment_amount}", report.paid_by, report.daily_details, report.daily_note ])
+                writer.writerow([report.date_created.date(), report.genba.name, report.genba.client, "有", report.genba.head_person.fullname, attendees, report.shift, report.genba.address, report.start_time, report.end_time, report.highway_start, report.highway_end, report.highway_payment, report.parking, report.hotel, f"{report.other_payment, report.other_payment_amount}", report.paid_by, report.daily_details, report.daily_note ])
             else:
-                writer.writerow([report.date_created.date(), report.genba.name, report.genba.client, "有", report.genba.head_person.fullname, report.genba.attendees.all(), report.shift, report.genba.address, report.start_time, report.end_time, report.highway_start, report.highway_end, report.highway_payment, report.parking, report.hotel, f"{report.other_payment, report.other_payment_amount}", report.paid_by, report.daily_details, report.daily_note ])
+                writer.writerow([report.date_created.date(), report.genba.name, report.genba.client, "無", report.genba.head_person.fullname, attendees, report.shift, report.genba.address, report.start_time, report.end_time, report.highway_start, report.highway_end, report.highway_payment, report.parking, report.hotel, f"{report.other_payment, report.other_payment_amount}", report.paid_by, report.daily_details, report.daily_note ])
         return response
     else:
         messages.success(request, "データがありません。")
