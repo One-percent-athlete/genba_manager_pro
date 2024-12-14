@@ -118,6 +118,7 @@ def update_profile(request, profile_id):
                 form.save()
                 messages.success(request, "プロフィールを更新しました。")
                 return redirect("profile_list")
+            
             return render(request, "update_profile.html", {"form": form , "profile": profile })
         else:
             messages.success(request, "ログインしてください。")
@@ -130,8 +131,7 @@ def update_profile(request, profile_id):
 def delete_user(request, user_id):
     if request.user.is_authenticated:
         current_user = Profile.objects.get(user__id=user_id)
-        current_user.is_active=False
-        current_user.save()
+        current_user.delete()
         messages.success(request, "プロフィールを削除しました。")
         return redirect("profile_list")
     else:
