@@ -15,11 +15,13 @@ from .forms import SignUpForm, UserProfileForm, GenbaForm, DailyReportForm
 # 工場作業追加
 # 作業日報に人数追加
 # 工場作業と現場作業分ける
-# 前の日の作業日報提出
 # 現場一覧をまとめる　日付を分けると大変
+
 # 作業日報に同行者を追加
 # 現場毎予定同行者と作業日報の同行者を紐付けると同行者が変わる現場スケジュールを変える必要がある
 
+
+# 前の日の作業日報提出
 
 @login_required(login_url='/login_user/')
 def home(request):
