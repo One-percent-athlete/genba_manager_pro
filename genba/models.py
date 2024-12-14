@@ -1,8 +1,9 @@
 from datetime import date
 from django.db import models
-from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
+
+from django.utils import timezone
 
 
 class Profile(models.Model):
@@ -100,9 +101,10 @@ class DailyReport(models.Model):
     shift = models.CharField("日勤夜勤", max_length=50, choices=DAY_OR_NIGHT, default='日勤')
     daily_note = models.CharField("備考", max_length=500, blank=True)
     date_created = models.DateTimeField("作成日", auto_now_add=True)
+    working_date = models.DateField("作業日", blank=True, null=True)
     kentaikyo = models.BooleanField("建退共", default=False)
-    start_time = models.TimeField('作業開始日')
-    end_time = models.TimeField('作業終了日')
+    start_time = models.TimeField('作業開始時間')
+    end_time = models.TimeField('作業終了時間')
     break_time = models.CharField("休憩時間", max_length=10, blank=True)
 
     @property
