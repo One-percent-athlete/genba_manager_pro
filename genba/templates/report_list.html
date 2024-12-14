@@ -34,7 +34,13 @@
                 class="text-normal text-gray-700 uppercase bg-gray-50 whitespace-nowrap dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                     <th scope="col" class="px-6 py-3">
-                        日時
+                        提出日
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        作業日
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        作成者
                     </th>
                     <th scope="col" class="px-6 py-3">
                         現場名
@@ -104,6 +110,12 @@
             <tbody>
                 <th scope="row" class="pl-6 pr-3 py-4 font-medium whitespace-nowrap text-gray-900">
                     {{report.date_created | date:"Y-m-d" }}
+                </th>
+                <th scope="row" class="pl-6 pr-3 py-4 font-medium whitespace-nowrap text-gray-900">
+                    {{report.working_date | date:"Y-m-d" }}
+                </th>
+                <th scope="row" class="pl-6 pr-3 py-4 font-medium whitespace-nowrap text-gray-900">
+                    {{report.created_by }}
                 </th>
                 <td class="px-6 py-4 whitespace-nowrap">
                     {{ report.genba.name }}
@@ -188,7 +200,13 @@
                 class="text-normal text-gray-700 uppercase bg-gray-50 whitespace-nowrap dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                     <th scope="col" class="px-6 py-3">
-                        日時
+                        提出日
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        作業日
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        作成者
                     </th>
                     <th scope="col" class="px-6 py-3">
                         現場名
@@ -258,6 +276,12 @@
             <tbody>
                 <th scope="row" class="pl-6 pr-3 py-4 font-medium whitespace-nowrap text-gray-900">
                     {{report.date_created | date:"Y-m-j" }}
+                </th>
+                <th scope="row" class="pl-6 pr-3 py-4 font-medium whitespace-nowrap text-gray-900">
+                    {{report.working_date | date:"Y-m-j" }}
+                </th>
+                <th scope="row" class="pl-6 pr-3 py-4 font-medium whitespace-nowrap text-gray-900">
+                    {{report.created_by }}
                 </th>
                 <td class="px-6 py-4 whitespace-nowrap">
                     {{ report.genba.name }}

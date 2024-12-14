@@ -274,6 +274,7 @@ def add_report(request):
     if request.method == "POST":
         form = DailyReportForm(request.POST or None)
         if form.is_valid():
+            form.created_by = request.user.profile.fullname
             form.save()
             messages.success(request, ("作業日報を追加しました。"))
             return redirect("report_list")

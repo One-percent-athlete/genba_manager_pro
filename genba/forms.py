@@ -101,6 +101,7 @@ class DailyReportForm(forms.ModelForm):
 	other_payment = forms.BooleanField(label="その他経費", required=False),
 	other_payment_amount = forms.Select(attrs={"class":"form-select", "placeholder": "金額"}),
 	paid_by = forms.Select(attrs={"class":"form-select", "placeholder": "建替人"}),
+	created_by = forms.Select(attrs={"class":"form-select"}),
 	daily_details = forms.CharField(label="作業内容", max_length=100, required=False, widget=forms.TextInput(attrs={'class':'form-control'}))
 	daily_note = forms.CharField(label="その他連絡事項", max_length=100, required=False, widget=forms.TextInput(attrs={'class':'form-control'}))
 	
