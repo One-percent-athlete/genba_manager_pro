@@ -233,8 +233,7 @@ def add_genba(request):
 def delete_genba(request, genba_id):
     if request.user.is_authenticated:
         current_genba = Genba.objects.get(id=genba_id)
-        current_genba.is_active=False
-        current_genba.save()
+        current_genba.delete()
         messages.success(request, "現場を削除しました。")
         return redirect("genba_list")
     else:
