@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 import calendar
 import csv, urllib
 import datetime
+from django.utils import timezone
 now = datetime.datetime.now()
 from .models import Profile, Genba, Notification, DailyReport
 from .forms import SignUpForm, UserProfileForm, GenbaForm, DailyReportForm
@@ -27,6 +28,8 @@ from .forms import SignUpForm, UserProfileForm, GenbaForm, DailyReportForm
 @login_required(login_url='/login_user/')
 def home(request):
     if request.user.is_authenticated:
+        print(timezone.now())
+        print(now)
         genba_list = Genba.objects.all().order_by('-date_created')
         genbas = []
         for genba in genba_list:
