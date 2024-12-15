@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm,SetPasswordForm
+from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from .models import Profile, Genba, DailyReport
 
@@ -105,7 +105,6 @@ class DailyReportForm(forms.ModelForm):
 	paid_by = forms.Select(attrs={"class":"form-select", "placeholder": "建替人"}),
 	daily_details = forms.CharField(label="作業内容", max_length=100, required=False, widget=forms.TextInput(attrs={'class':'form-control'}))
 	daily_note = forms.CharField(label="その他連絡事項", max_length=100, required=False, widget=forms.TextInput(attrs={'class':'form-control'}))
-	
 
 	class Meta:
 		model = DailyReport

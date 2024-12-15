@@ -13,7 +13,6 @@ now = datetime.datetime.now()
 from .models import Profile, Genba, Notification, DailyReport
 from .forms import SignUpForm, UserProfileForm, GenbaForm, DailyReportForm
 
-
 # 現場一覧をまとめる 日付を分けると大変
 
 # 作業日報に人数追加 ok
@@ -271,7 +270,6 @@ def report_list(request):
 @login_required(login_url='/login_user/')
 def add_report(request):
     form = DailyReportForm()
-    current_user = request.user.profile.fullname
     if request.method == "POST":
         form = DailyReportForm(request.POST or None)
         if form.is_valid():
