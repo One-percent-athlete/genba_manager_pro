@@ -52,10 +52,10 @@
                         建退共
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        職長
+                        作業員
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        同行者
+                        人数
                     </th>
                     <th scope="col" class="px-6 py-3">
                         シフト
@@ -131,12 +131,12 @@
                     {% endif %}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                    {{ report.genba.head_person }}
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                    {% for a in report.genba.attendees.all %}
+                    {% for a in report.workers.all %}
                     {{ a }}
                     {% endfor %}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    {{ report.workers.all.count }}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
                     {{ report.shift }}
@@ -154,25 +154,37 @@
                     {{ report.break_time }}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
+                    {% if report.highway_start %}
                     {{ report.highway_start }} から
+                    {% endif %}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
                     {{ report.highway_end }}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
+                    {% if report.highway_payment %}
                     {{ report.highway_payment }}
+                    {% endif %}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                    {{ report.parking }}
+                    {% if report.parking %}
+                    {{ report.parking }} 円
+                    {% endif %}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                    {{ report.hotel }}
+                    {% if report.hotel %}
+                    {{ report.hotel }} 円
+                    {% endif %}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
+                    {% if report.other_payment_amount %}
                     {{ report.other_payment }} {{ report.other_payment_amount }} 円
+                    {% endif %}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
+                    {% if report.paid_by %}
                     {{ report.paid_by }}
+                    {% endif %}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
                     {{ report.daily_details }}
@@ -218,10 +230,10 @@
                         建退共
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        職長
+                        作業員
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        同行者
+                        人数
                     </th>
                     <th scope="col" class="px-6 py-3">
                         シフト
@@ -297,12 +309,12 @@
                     {% endif %}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                    {{ report.genba.head_person }}
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                    {% for a in report.genba.attendees.all %}
+                    {% for a in report.workers.all %}
                     {{ a }}
                     {% endfor %}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    {{ report.report.workers.all.count }}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
                     {{ report.shift }}
@@ -320,25 +332,37 @@
                     {{ report.break_time }}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
+                    {% if report.highway_start %}
                     {{ report.highway_start }} から
+                    {% endif %}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
                     {{ report.highway_end }}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
+                    {% if report.highway_payment %}
                     {{ report.highway_payment }}
+                    {% endif %}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                    {{ report.parking }}
+                    {% if report.parking %}
+                    {{ report.parking }} 円
+                    {% endif %}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
+                    {% if report.paid_by %}
                     {{ report.paid_by }}
+                    {% endif %}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                    {{ report.hotel }}
+                    {% if report.hotel %}
+                    {{ report.hotel }} 円
+                    {% endif %}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
+                    {% if report.other_payment_amount %}
                     {{ report.other_payment }} {{ report.other_payment_amount }} 円
+                    {% endif %}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
                     {{ report.daily_details }}
