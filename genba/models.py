@@ -85,6 +85,7 @@ class DailyReport(models.Model):
         ('夜勤', '夜勤'),
         )
     genba = models.ForeignKey(Genba, related_name="genba", on_delete=models.CASCADE)
+    workers = models.ManyToManyField(Profile, related_name="workers", blank=True)
     distance = models.CharField("距離", max_length=10)
     highway_start = models.CharField("高速乗り", max_length=100, blank=True)
     highway_end = models.CharField("高速降り", max_length=100, blank=True)
