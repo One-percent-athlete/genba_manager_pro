@@ -8,20 +8,20 @@ from django.contrib.auth.models import User
 import calendar
 import csv, urllib
 import datetime
-from django.utils import timezone
 now = datetime.datetime.now()
+
 from .models import Profile, Genba, Notification, DailyReport
 from .forms import SignUpForm, UserProfileForm, GenbaForm, DailyReportForm
 
 
-# 現場一覧をまとめる　日付を分けると大変
+# 現場一覧をまとめる 日付を分けると大変
 
-# 作業日報に人数追加
-# 作業日報に同行者を追加
-# 現場毎予定同行者と作業日報の同行者を紐付けると同行者が変わる現場スケジュールを変える必要がある
+# 作業日報に人数追加 ok
+# 作業日報に同行者を追加 ok
+# 現場毎予定同行者と作業日報の同行者を紐付けると同行者が変わる現場スケジュールを変える必要がある ok
 
-# 作業日報作成者  ok
-# 前の日の作業日報提出　 ok
+# 作業日報作成者 ok
+# 前の日の作業日報提出 ok
 # カレンダー表示 ok
 # 休憩時間をｃｓｖに追加 ok 
 
@@ -120,7 +120,6 @@ def update_profile(request, profile_id):
                 form.save()
                 messages.success(request, "プロフィールを更新しました。")
                 return redirect("profile_list")
-            
             return render(request, "update_profile.html", {"form": form , "profile": profile })
         else:
             messages.success(request, "ログインしてください。")
@@ -338,7 +337,3 @@ def export_csv(request):
     else:
         messages.success(request, "データがありません。")
         return redirect("report_list")
-
-@login_required(login_url='/login/')
-def schedule_details(request):
-    return render(request, "schedule_details.html")
