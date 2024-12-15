@@ -23,6 +23,7 @@ from .forms import SignUpForm, UserProfileForm, GenbaForm, DailyReportForm
 
 # 作業日報作成者
 # 前の日の作業日報提出
+# カレンダー表示 ok
 # 休憩時間をｃｓｖに追加 ok 
 
 @login_required(login_url='/login_user/')
@@ -274,10 +275,10 @@ def report_list(request):
 @login_required(login_url='/login_user/')
 def add_report(request):
     form = DailyReportForm()
+    current_user = request.user.profile.fullname
     if request.method == "POST":
         form = DailyReportForm(request.POST or None)
         if form.is_valid():
-            form.created_by = request.user.profile.fullname
             form.save()
             messages.success(request, ("作業日報を追加しました。"))
             return redirect("report_list")
@@ -327,15 +328,15 @@ def export_csv(request):
     writer = csv.writer(response)
     daily_report_list = DailyReport.objects.all()
     if daily_report_list:
-        writer.writerow(["作成日", "作業日", "現場名", "取引先", "建退共", "職長", "同行者", "シフト", "場所", "開始時間", "終了時間", "休憩時間", "高速道路乗り", "高速道路降り", "高速支払い方法", "駐車場料金", "宿泊料金", "その他支払い", "建替人", "作業内容", "連絡事項"])
+        writer.writerow(["作成日", "作業日", "作成者", "現場名", "取引先", "建退共", "職長", "同行者", "シフト", "場所", "開始時間", "終了時間", "休憩時間", "高速道路乗り", "高速道路降り", "高速支払い方法", "駐車場料金", "宿泊料金", "その他支払い", "建替人", "作業内容", "連絡事項"])
         for report in daily_report_list:
             attendees = []
             for a in report.genba.attendees.all():
                 attendees.append(a.fullname)
             if report.kentaikyo:
-                writer.writerow([report.date_created.date(), report.working_date, report.genba.name, report.genba.client, "有", report.genba.head_person.fullname, attendees, report.shift, report.genba.address, report.start_time, report.end_time, report.break_time, report.highway_start, report.highway_end, report.highway_payment, report.parking, report.hotel, f"{report.other_payment, report.other_payment_amount}", report.paid_by, report.daily_details, report.daily_note ])
+                writer.writerow([report.date_created.date(), report.working_date, report.created_by, report.genba.name, report.genba.client, "有", report.genba.head_person.fullname, attendees, report.shift, report.genba.address, report.start_time, report.end_time, report.break_time, report.highway_start, report.highway_end, report.highway_payment, report.parking, report.hotel, f"{report.other_payment, report.other_payment_amount}", report.paid_by, report.daily_details, report.daily_note ])
             else:
-                writer.writerow([report.date_created.date(), report.working_date, report.genba.name, report.genba.client, "無", report.genba.head_person.fullname, attendees, report.shift, report.genba.address, report.start_time, report.end_time, report.break_time, report.highway_start, report.highway_end, report.highway_payment, report.parking, report.hotel, f"{report.other_payment, report.other_payment_amount}", report.paid_by, report.daily_details, report.daily_note ])
+                writer.writerow([report.date_created.date(), report.working_date, report.created_by, report.genba.name, report.genba.client, "無", report.genba.head_person.fullname, attendees, report.shift, report.genba.address, report.start_time, report.end_time, report.break_time, report.highway_start, report.highway_end, report.highway_payment, report.parking, report.hotel, f"{report.other_payment, report.other_payment_amount}", report.paid_by, report.daily_details, report.daily_note ])
         return response
     else:
         messages.success(request, "データがありません。")

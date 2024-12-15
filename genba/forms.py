@@ -85,6 +85,7 @@ class DailyReportForm(forms.ModelForm):
         ('日勤','日勤'),
         ('夜勤', '夜勤'),
         )
+	created_by = forms.Select(attrs={"class":"form-select"}),
 	genba = forms.Select(attrs={"class":"form-select"}),
 	working_date = forms.DateField(label='作業日', widget=forms.DateInput(attrs={'type': 'date'}))
 	shift = forms.ChoiceField(label="昼夜シフト", choices=DAY_OR_NIGHT, widget=forms.RadioSelect(attrs={'class': 'form-check-input'}))
@@ -101,22 +102,22 @@ class DailyReportForm(forms.ModelForm):
 	other_payment = forms.BooleanField(label="その他経費", required=False),
 	other_payment_amount = forms.Select(attrs={"class":"form-select", "placeholder": "金額"}),
 	paid_by = forms.Select(attrs={"class":"form-select", "placeholder": "建替人"}),
-	created_by = forms.Select(attrs={"class":"form-select"}),
 	daily_details = forms.CharField(label="作業内容", max_length=100, required=False, widget=forms.TextInput(attrs={'class':'form-control'}))
 	daily_note = forms.CharField(label="その他連絡事項", max_length=100, required=False, widget=forms.TextInput(attrs={'class':'form-control'}))
 	
 
 	class Meta:
 		model = DailyReport
-		fields = ('genba', 'working_date', 'shift', 'start_time', 'end_time', 'break_time', 'kentaikyo', 'distance', 'highway_start', 'highway_end', 'highway_payment', 'parking', 'hotel', 'other_payment', 'other_payment_amount', 'paid_by', 'daily_details', 'daily_note')
+		fields = ('created_by', 'genba', 'working_date', 'shift', 'start_time', 'end_time', 'break_time', 'kentaikyo', 'distance', 'highway_start', 'highway_end', 'highway_payment', 'parking', 'hotel', 'other_payment', 'other_payment_amount', 'paid_by', 'daily_details', 'daily_note')
 		labels = {
-           'genba':'現場名',
-           'distance':'走行距離数',
-           'parking':'駐車場利用料金（利用した場合のみ）',
-           'hotel':'宿泊利用料金（利用した場合のみ）',
-		   'paid_by': '建替人',
-		   'other_payment': 'その他使ったもの',
-		   'other_payment_amount': '使った金額', 
-		   'kentaikyo':'建退共',
+			'created_by':'作成者',
+           	'genba':'現場名',
+			'distance':'走行距離数',
+			'parking':'駐車場利用料金（利用した場合のみ）',
+			'hotel':'宿泊利用料金（利用した場合のみ）',
+			'paid_by': '建替人',
+			'other_payment': 'その他使ったもの',
+			'other_payment_amount': '使った金額', 
+			'kentaikyo':'建退共',
            }
 		

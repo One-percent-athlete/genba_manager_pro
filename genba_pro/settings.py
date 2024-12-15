@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-qdzx1bu6250a5s70&ly$4=rk18i=0=ny583i*7=-r*=(-dl!o3'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', "https://127.0.0.1",'genbamanagerpro-production.up.railway.app', 'https://genbamanagerpro-production.up.railway.app']
 CSRF_TRUSTED_ORIGINS = ['https://127.0.0.1', 'https://genbamanagerpro-production.up.railway.app']
