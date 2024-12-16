@@ -26,4 +26,5 @@ urlpatterns = [
     path('delete_report/<int:report_id>/', views.delete_report, name="delete_report"),
 
     path('export_csv/', views.export_csv, name="export_csv"),
+    path('export_searched/<str:keyword>/', views.export_searched, name="export_searched"),
 ]

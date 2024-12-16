@@ -268,6 +268,14 @@ def report_list(request):
     return render(request, "report_list.html", { 'reports': reports })
 
 @login_required(login_url='/login_user/')
+def export_searched(request, keyword):
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            keyword = request.POST['keyword']
+            result_list = DailyReport.objects.filter(date_created__contains=keyword).order_by('-date_created')
+            return render(request, "report_search_list.html", {"result_list": result_list, "keyword": keyword})
+
+@login_required(login_url='/login_user/')
 def add_report(request):
     form = DailyReportForm()
     if request.method == "POST":
@@ -275,10 +283,10 @@ def add_report(request):
         if form.is_valid():
             form.save()
             messages.success(request, ("作業日報を追加しました。"))
-            return redirect("report_list")
+            return redirect("report_search_list.html")
         else:
             messages.success(request, ("再度お試しください。"))
-            return redirect("report_list")
+            return redirect("report_search_list.html")
     else:
         return render(request, "add_report.html", {
             "form": form
