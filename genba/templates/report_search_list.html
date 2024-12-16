@@ -19,7 +19,13 @@
                 class="text-normal text-gray-700 uppercase bg-gray-50 whitespace-nowrap dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                     <th scope="col" class="px-6 py-3">
-                        日時
+                        提出日
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        作業日
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        作成者
                     </th>
                     <th scope="col" class="px-6 py-3">
                         現場名
@@ -47,6 +53,9 @@
                     </th>
                     <th scope="col" class="px-6 py-3">
                         終了時間
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        休憩時間
                     </th>
                     <th scope="col" class="px-6 py-3">
                         高速道路乗り
@@ -84,7 +93,13 @@
             {% for report in result_list %}
             <tbody>
                 <th scope="row" class="pl-6 pr-3 py-4 font-medium whitespace-nowrap text-gray-900">
-                    {{report.date_created | date:"Y-m-d" }}
+                    {{report.date_created | date:"Y-m-j" }}
+                </th>
+                <th scope="row" class="pl-6 pr-3 py-4 font-medium whitespace-nowrap text-gray-900">
+                    {{report.working_date | date:"Y-m-j" }}
+                </th>
+                <th scope="row" class="pl-6 pr-3 py-4 font-medium whitespace-nowrap text-gray-900">
+                    {{report.created_by }}
                 </th>
                 <td class="px-6 py-4 whitespace-nowrap">
                     {{ report.genba.name }}
@@ -123,25 +138,37 @@
                     {{ report.break_time }}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
+                    {% if report.highway_start %}
                     {{ report.highway_start }} から
+                    {% endif %}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
                     {{ report.highway_end }}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
+                    {% if report.highway_payment %}
                     {{ report.highway_payment }}
+                    {% endif %}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                    {{ report.parking }}
+                    {% if report.parking %}
+                    {{ report.parking }} 円
+                    {% endif %}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                    {{ report.hotel }}
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                    {{ report.other_payment }} {{ report.other_payment_amount }} 円
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
+                    {% if report.paid_by %}
                     {{ report.paid_by }}
+                    {% endif %}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    {% if report.hotel %}
+                    {{ report.hotel }} 円
+                    {% endif %}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    {% if report.other_payment_amount %}
+                    {{ report.other_payment }} {{ report.other_payment_amount }} 円
+                    {% endif %}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
                     {{ report.daily_details }}
