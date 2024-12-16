@@ -10,7 +10,7 @@
             <h1 class="text-4xl py-10">作業日報検索結果一覧（{{ keyword }}）
                 {% if request.user.profile.contract_type == "管理" %}
                 <a class="ml-6 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-1 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-                    href="{% url 'export_searched' {{ keyword }} %}">CSV作成</a>
+                    href="{% url 'export_searched' keyword %}">CSV作成</a>
                 {% endif %}
             </h1>
         </div>
@@ -31,10 +31,10 @@
                         建退共
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        職長
+                        作業員
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        同行者
+                        人数
                     </th>
                     <th scope="col" class="px-6 py-3">
                         シフト
@@ -103,9 +103,12 @@
                     {{ report.genba.head_person }}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                    {% for a in report.genba.attendees.all %}
+                    {% for a in report.workers.all %}
                     {{ a }}
                     {% endfor %}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    {{ report.workers.all.count }}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
                     {{ report.shift }}
