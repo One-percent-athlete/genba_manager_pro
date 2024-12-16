@@ -271,11 +271,12 @@ def report_list(request):
 def export_searched(request, keyword):
     if request.user.is_authenticated:
         result_list = DailyReport.objects.filter(date_created__contains=keyword).order_by('-date_created')
-        f = "現場毎作業日報" + "_" + ".csv"
+        f = "現場毎作業日報" + "_" + keyword + ".csv"
         response = HttpResponse(content_type='text/csv; charset=utf-8-sig')
         filename = urllib.parse.quote((f).encode('utf-8'))
         response['Content-Disposition'] = f'attachment; filename*=UTF-8\'\'{filename}'
         writer = csv.writer(response)
+        print(result_list)
         if result_list:
             writer.writerow(["作成日", "作業日", "作成者", "現場名", "取引先", "建退共", "作業員","人数", "シフト", "場所", "開始時間", "終了時間", "休憩時間", "高速道路乗り", "高速道路降り", "高速支払い方法", "駐車場料金", "宿泊料金", "その他支払い", "建替人", "作業内容", "連絡事項"])
             for report in result_list:
@@ -286,11 +287,10 @@ def export_searched(request, keyword):
                     writer.writerow([report.date_created.strftime("%Y/%m/%d"), report.working_date, report.created_by, report.genba.name, report.genba.client, "有", ' '.join([a for a in attendees]), len(attendees), report.shift, report.genba.address, report.start_time, report.end_time, report.break_time, report.highway_start, report.highway_end, report.highway_payment, report.parking, report.hotel, f"{report.other_payment} {report.other_payment_amount}", report.paid_by, report.daily_details, report.daily_note ])
                 else:
                     writer.writerow([report.date_created.strftime("%Y/%m/%d"), report.working_date, report.created_by, report.genba.name, report.genba.client, "無", ' '.join([a for a in attendees]), len(attendees), report.shift, report.genba.address, report.start_time, report.end_time, report.break_time, report.highway_start, report.highway_end, report.highway_payment, report.parking, report.hotel, f"{report.other_payment} {report.other_payment_amount}", report.paid_by, report.daily_details, report.daily_note ])
-                return response
+            return response
         else:
             messages.success(request, "データがありません。")
             return redirect("report_list")
-        return render(request, "report_search_list.html", {"result_list": result_list, "keyword": keyword})
 
 @login_required(login_url='/login_user/')
 def add_report(request):
@@ -345,7 +345,7 @@ def export_csv(request):
         filename = urllib.parse.quote((f).encode('utf-8'))
         response['Content-Disposition'] = f'attachment; filename*=UTF-8\'\'{filename}'
     writer = csv.writer(response)
-    daily_report_list = DailyReport.objects.all()
+    daily_report_list = DailyReport.objects.filter()
     if daily_report_list:
         writer.writerow(["作成日", "作業日", "作成者", "現場名", "取引先", "建退共", "作業員","人数", "シフト", "場所", "開始時間", "終了時間", "休憩時間", "高速道路乗り", "高速道路降り", "高速支払い方法", "駐車場料金", "宿泊料金", "その他支払い", "建替人", "作業内容", "連絡事項"])
         for report in daily_report_list:
