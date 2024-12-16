@@ -283,9 +283,9 @@ def export_searched(request, keyword):
                 for a in report.workers.all():
                     attendees.append(a.fullname)
                 if report.kentaikyo:
-                    writer.writerow([report.date_created.strftime("%Y/%m/%d"), report.working_date.replace("/", "-"), report.created_by, report.genba.name, report.genba.client, "有", ' '.join([a for a in attendees]), len(attendees), report.shift, report.genba.address, report.start_time, report.end_time, report.break_time, report.highway_start, report.highway_end, report.highway_payment, report.parking, report.hotel, f"{report.other_payment}:{report.other_payment_amount}", report.paid_by, report.daily_details, report.daily_note ])
+                    writer.writerow([report.date_created.strftime("%Y/%m/%d"), report.working_date, report.created_by, report.genba.name, report.genba.client, "有", ' '.join([a for a in attendees]), len(attendees), report.shift, report.genba.address, report.start_time, report.end_time, report.break_time, report.highway_start, report.highway_end, report.highway_payment, report.parking, report.hotel, f"{report.other_payment} {report.other_payment_amount}", report.paid_by, report.daily_details, report.daily_note ])
                 else:
-                    writer.writerow([report.date_created.strftime("%Y/%m/%d"), report.working_date.replace("/", "-"), report.created_by, report.genba.name, report.genba.client, "無", ' '.join([a for a in attendees]), len(attendees), report.shift, report.genba.address, report.start_time, report.end_time, report.break_time, report.highway_start, report.highway_end, report.highway_payment, report.parking, report.hotel, f"{report.other_payment}:{report.other_payment_amount}", report.paid_by, report.daily_details, report.daily_note ])
+                    writer.writerow([report.date_created.strftime("%Y/%m/%d"), report.working_date, report.created_by, report.genba.name, report.genba.client, "無", ' '.join([a for a in attendees]), len(attendees), report.shift, report.genba.address, report.start_time, report.end_time, report.break_time, report.highway_start, report.highway_end, report.highway_payment, report.parking, report.hotel, f"{report.other_payment} {report.other_payment_amount}", report.paid_by, report.daily_details, report.daily_note ])
                 return response
         else:
             messages.success(request, "データがありません。")
@@ -353,9 +353,9 @@ def export_csv(request):
             for a in report.workers.all():
                 attendees.append(a.fullname)
             if report.kentaikyo:
-                writer.writerow([report.date_created.strftime("%Y/%m/%d"), report.working_date, report.created_by, report.genba.name, report.genba.client, "有", ' '.join([a for a in attendees]), len(attendees), report.shift, report.genba.address, report.start_time, report.end_time, report.break_time, report.highway_start, report.highway_end, report.highway_payment, report.parking, report.hotel, f"{report.other_payment, report.other_payment_amount}", report.paid_by, report.daily_details, report.daily_note ])
+                writer.writerow([report.date_created.strftime("%Y/%m/%d"), report.working_date, report.created_by, report.genba.name, report.genba.client, "有", ' '.join([a for a in attendees]), len(attendees), report.shift, report.genba.address, report.start_time, report.end_time, report.break_time, report.highway_start, report.highway_end, report.highway_payment, report.parking, report.hotel, f"{report.other_payment} {report.other_payment_amount}", report.paid_by, report.daily_details, report.daily_note ])
             else:
-                writer.writerow([report.date_created.strftime("%Y/%m/%d"), report.working_date, report.created_by, report.genba.name, report.genba.client, "無", ' '.join([a for a in attendees]), len(attendees), report.shift, report.genba.address, report.start_time, report.end_time, report.break_time, report.highway_start, report.highway_end, report.highway_payment, report.parking, report.hotel, f"{report.other_payment, report.other_payment_amount}", report.paid_by, report.daily_details, report.daily_note ])
+                writer.writerow([report.date_created.strftime("%Y/%m/%d"), report.working_date, report.created_by, report.genba.name, report.genba.client, "無", ' '.join([a for a in attendees]), len(attendees), report.shift, report.genba.address, report.start_time, report.end_time, report.break_time, report.highway_start, report.highway_end, report.highway_payment, report.parking, report.hotel, f"{report.other_payment} {report.other_payment_amount}", report.paid_by, report.daily_details, report.daily_note ])
         return response
     else:
         messages.success(request, "データがありません。")
