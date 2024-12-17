@@ -85,9 +85,14 @@ class DailyReportForm(forms.ModelForm):
         ('日勤','日勤'),
         ('夜勤', '夜勤'),
         )
+	SELECT_TYPES = (
+        ('請負','請負'),
+        ('乗用', '乗用'),
+    )
 	created_by = forms.Select(attrs={"class":"form-select"}),
 	genba = forms.Select(attrs={"class":"form-select"}),
 	working_date = forms.DateField(label='作業日', widget=forms.DateInput(attrs={'type': 'date'}))
+	select_types = forms.ChoiceField(label="請負乗用", choices=SELECT_TYPES, widget=forms.RadioSelect(attrs={'class': 'form-check-input'}))
 	shift = forms.ChoiceField(label="昼夜シフト", choices=DAY_OR_NIGHT, widget=forms.RadioSelect(attrs={'class': 'form-check-input'}))
 	workers = forms.ModelMultipleChoiceField(label="作業員", queryset=Profile.objects.all(), widget=forms.CheckboxSelectMultiple)
 	start_time = forms.TimeField(label="作業開始時間", widget=forms.TimeInput(attrs={'type': 'time'}))
@@ -108,7 +113,7 @@ class DailyReportForm(forms.ModelForm):
 
 	class Meta:
 		model = DailyReport
-		fields = ('created_by', 'genba', 'working_date', 'shift', 'workers', 'start_time', 'end_time', 'break_time', 'kentaikyo', 'distance', 'highway_start', 'highway_end', 'highway_payment', 'parking', 'hotel', 'other_payment', 'other_payment_amount', 'paid_by', 'daily_details', 'daily_note')
+		fields = ('created_by', 'genba', 'working_date', 'select_types', 'shift', 'workers', 'start_time', 'end_time', 'break_time', 'kentaikyo', 'distance', 'highway_start', 'highway_end', 'highway_payment', 'parking', 'hotel', 'other_payment', 'other_payment_amount', 'paid_by', 'daily_details', 'daily_note')
 		labels = {
 			'created_by':'作成者',
            	'genba':'現場名',
