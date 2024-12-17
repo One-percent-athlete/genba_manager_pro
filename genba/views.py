@@ -14,6 +14,7 @@ from .models import Profile, Genba, Notification, DailyReport
 from .forms import SignUpForm, UserProfileForm, GenbaForm, DailyReportForm
 
 # 現場一覧をまとめる 日付を分けると大変
+# 下請ログイン
 
 @login_required(login_url='/login_user/')
 def home(request):

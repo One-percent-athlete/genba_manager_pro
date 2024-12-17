@@ -89,40 +89,35 @@ class DailyReportForm(forms.ModelForm):
         ('請負','請負'),
         ('乗用', '乗用'),
     )
-	created_by = forms.Select(attrs={"class":"form-select"}),
-	genba = forms.Select(attrs={"class":"form-select"}),
-	working_date = forms.DateField(label='作業日', widget=forms.DateInput(attrs={'type': 'date'}))
+	created_by = forms.Select(attrs={"class":"form-select mb-4 p-2 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300"}),
+	genba = forms.Select(attrs={"class":"form-select mb-4 p-2 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300"}),
+	kentaikyo = forms.BooleanField(label="建退共", required=False),
+	working_date = forms.DateField(label='作業日', widget=forms.DateInput(attrs={'type': 'date', "class": "mb-4 p-2 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300"}))
 	select_types = forms.ChoiceField(label="請負・乗用", choices=SELECT_TYPES, widget=forms.RadioSelect(attrs={'class': 'form-check-input'}))
 	shift = forms.ChoiceField(label="昼夜シフト", choices=DAY_OR_NIGHT, widget=forms.RadioSelect(attrs={'class': 'form-check-input'}))
 	workers = forms.ModelMultipleChoiceField(label="作業員", queryset=Profile.objects.all(), widget=forms.CheckboxSelectMultiple)
-	start_time = forms.TimeField(label="作業開始時間", widget=forms.TimeInput(attrs={'type': 'time'}))
-	end_time = forms.TimeField(label="作業終了時間", widget=forms.TimeInput(attrs={'type': 'time'}))
-	break_time = forms.CharField(label="休憩時間", max_length=10, required=False, widget=forms.TextInput(attrs={'class':'form-control'}))
-	kentaikyo = forms.BooleanField(label="建退共", required=False),
-	distance = forms.Select(attrs={"class":"form-select", "placeholder": "距離"}),
-	highway_start = forms.CharField(label="", max_length=100, required=False, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'高速道路乗ったインター'}))
-	highway_end = forms.CharField(label="", max_length=100, required=False, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'高速道路降りたインター'}))
+	start_time = forms.TimeField(label="作業開始時間", widget=forms.TimeInput(attrs={'type': 'time', 'class': 'mb-4 p-2 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300'}))
+	end_time = forms.TimeField(label="作業終了時間", widget=forms.TimeInput(attrs={'type': 'time','class': 'mb-4 p-2 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300'}))
+	break_time = forms.CharField(label="", max_length=10, required=False, widget=forms.TextInput(attrs={'class':'form-control mb-4 p-2 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300', 'placeholder': '休憩時間'}))
+	distance = forms.CharField(label="", max_length=100, required=False, widget=forms.TextInput(attrs={'class':'form-control mb-4 p-2 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300', 'placeholder':'走行距離数'}))
+	highway_start = forms.CharField(label="", max_length=100, required=False, widget=forms.TextInput(attrs={'class':'form-control mb-4 p-2 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300', 'placeholder':'高速道路乗ったインター'}))
+	highway_end = forms.CharField(label="", max_length=100, required=False, widget=forms.TextInput(attrs={'class':'form-control mb-4 p-2 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300', 'placeholder':'高速道路降りたインター'}))
 	highway_payment = forms.ChoiceField(label="支払い方法", choices=PAYMENT_TYPES, widget=forms.RadioSelect(attrs={'class': 'form-check-input'}))
-	parking = forms.Select(attrs={"class":"form-select", "placeholder": "駐車料金"}),
-	hotel = forms.Select(attrs={"class":"form-select", "placeholder": "宿泊料金"}),
-	other_payment = forms.BooleanField(label="その他経費", required=False),
-	other_payment_amount = forms.Select(attrs={"class":"form-select", "placeholder": "金額"}),
-	paid_by = forms.Select(attrs={"class":"form-select", "placeholder": "建替人"}),
-	daily_details = forms.CharField(label="作業内容", max_length=100, required=False, widget=forms.TextInput(attrs={'class':'form-control'}))
-	daily_note = forms.CharField(label="その他連絡事項", max_length=100, required=False, widget=forms.TextInput(attrs={'class':'form-control'}))
+	parking = forms.CharField(label="", max_length=100, required=False, widget=forms.TextInput(attrs={'class':'form-control mb-4 p-2 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300', 'placeholder':'駐車料金'}))
+	hotel = forms.CharField(label="", max_length=100, required=False, widget=forms.TextInput(attrs={'class':'form-control mb-4 p-2 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300', 'placeholder':'宿泊料金'}))
+	other_payment = forms.CharField(label="", max_length=100, required=False, widget=forms.TextInput(attrs={'class':'form-control mb-4 p-2 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300', 'placeholder':'その他お支払いもの'}))
+	other_payment_amount = forms.CharField(label="", max_length=100, required=False, widget=forms.TextInput(attrs={'class':'form-control mb-4 p-2 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300', 'placeholder':'その他お支払い金額'}))
+	paid_by = forms.Select(attrs={"class":"form-select mb-4 p-2 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300", "placeholder": "建替人"}),
+	daily_details = forms.CharField(label="", max_length=100, required=False, widget=forms.TextInput(attrs={'class':'form-control mb-4 p-2 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300','placeholder':'作業内容'}))
+	daily_note = forms.CharField(label="", max_length=100, required=False, widget=forms.TextInput(attrs={'class':'form-control mb-4 p-2 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300', 'placeholder':'連絡事項'}))
 
 	class Meta:
 		model = DailyReport
-		fields = ('created_by', 'genba', 'working_date', 'select_types', 'shift', 'workers', 'start_time', 'end_time', 'break_time', 'kentaikyo', 'distance', 'highway_start', 'highway_end', 'highway_payment', 'parking', 'hotel', 'other_payment', 'other_payment_amount', 'paid_by', 'daily_details', 'daily_note')
+		fields = ('created_by', 'genba', 'kentaikyo', 'working_date', 'select_types', 'shift', 'workers', 'start_time', 'end_time', 'break_time', 'distance', 'highway_start', 'highway_end', 'highway_payment', 'parking', 'hotel', 'other_payment', 'other_payment_amount', 'paid_by', 'daily_details', 'daily_note')
 		labels = {
 			'created_by':'作成者',
            	'genba':'現場名',
-			'distance':'走行距離数',
-			'parking':'駐車場利用料金（利用した場合のみ）',
-			'hotel':'宿泊利用料金（利用した場合のみ）',
 			'paid_by': '建替人',
-			'other_payment': 'その他使ったもの',
-			'other_payment_amount': '使った金額', 
 			'kentaikyo':'建退共',
            }
 		
