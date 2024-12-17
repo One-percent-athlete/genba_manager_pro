@@ -92,7 +92,7 @@ class DailyReportForm(forms.ModelForm):
 	created_by = forms.Select(attrs={"class":"form-select"}),
 	genba = forms.Select(attrs={"class":"form-select"}),
 	working_date = forms.DateField(label='作業日', widget=forms.DateInput(attrs={'type': 'date'}))
-	select_types = forms.ChoiceField(label="請負乗用", choices=SELECT_TYPES, widget=forms.RadioSelect(attrs={'class': 'form-check-input'}))
+	select_types = forms.ChoiceField(label="請負・乗用", choices=SELECT_TYPES, widget=forms.RadioSelect(attrs={'class': 'form-check-input'}))
 	shift = forms.ChoiceField(label="昼夜シフト", choices=DAY_OR_NIGHT, widget=forms.RadioSelect(attrs={'class': 'form-check-input'}))
 	workers = forms.ModelMultipleChoiceField(label="作業員", queryset=Profile.objects.all(), widget=forms.CheckboxSelectMultiple)
 	start_time = forms.TimeField(label="作業開始時間", widget=forms.TimeInput(attrs={'type': 'time'}))

@@ -51,6 +51,9 @@
                         建退共
                     </th>
                     <th scope="col" class="px-6 py-3">
+                        請負・乗用
+                    </th>
+                    <th scope="col" class="px-6 py-3">
                         作業員
                     </th>
                     <th scope="col" class="px-6 py-3">
@@ -128,6 +131,9 @@
                     {% else %}
                     無
                     {% endif %}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    {{ report.select_types }}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
                     {% for a in report.workers.all %}
@@ -229,6 +235,9 @@
                         建退共
                     </th>
                     <th scope="col" class="px-6 py-3">
+                        請負・乗用
+                    </th>
+                    <th scope="col" class="px-6 py-3">
                         作業員
                     </th>
                     <th scope="col" class="px-6 py-3">
@@ -306,6 +315,9 @@
                     {% else %}
                     無
                     {% endif %}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    {{ report.select_types }}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
                     {% for a in report.workers.all %}
