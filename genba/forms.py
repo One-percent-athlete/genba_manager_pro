@@ -78,6 +78,8 @@ class DailyReportForm(forms.ModelForm):
         ('現金','現金'),
         ('カード', 'カード'),
         ('電子マネー', '電子マネー'),
+		('会社ETC', '会社ETC'),
+        ('無', '無'),
         )
 	DAY_OR_NIGHT = (
         ('日勤','日勤'),
