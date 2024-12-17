@@ -15,15 +15,6 @@ from .forms import SignUpForm, UserProfileForm, GenbaForm, DailyReportForm
 
 # 現場一覧をまとめる 日付を分けると大変
 
-# 作業日報に人数追加 ok
-# 作業日報に同行者を追加 ok
-# 現場毎予定同行者と作業日報の同行者を紐付けると同行者が変わる現場スケジュールを変える必要がある ok
-
-# 作業日報作成者 ok
-# 前の日の作業日報提出 ok
-# カレンダー表示 ok
-# 休憩時間をｃｓｖに追加 ok 
-
 @login_required(login_url='/login_user/')
 def home(request):
     if request.user.is_authenticated:

@@ -75,6 +75,10 @@ class Notification(models.Model):
         return f"{self.content} - {self.author} - {self.created_at}"
 
 class DailyReport(models.Model):
+    SELECT_TYPES = (
+        ('請負','請負'),
+        ('乗用', '乗用'),
+    )
     PAYMENT_TYPES = (
         ('現金','現金'),
         ('カード', 'カード'),
@@ -90,6 +94,7 @@ class DailyReport(models.Model):
     highway_start = models.CharField("高速乗り", max_length=100, blank=True)
     highway_end = models.CharField("高速降り", max_length=100, blank=True)
     highway_payment = models.CharField("高速料金", max_length=50, choices=PAYMENT_TYPES, blank=True)
+    select_types = models.CharField("請負乗用", max_length=50, choices=SELECT_TYPES, blank=True)
     parking = models.CharField("駐車", max_length=100, blank=True)
     hotel = models.CharField("宿泊", max_length=100, blank=True)
     paid_by = models.ForeignKey(Profile, related_name="paid_by", on_delete=models.CASCADE, null=True, blank=True)
