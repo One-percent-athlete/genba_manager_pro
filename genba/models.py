@@ -77,7 +77,7 @@ class Notification(models.Model):
 class DailyReport(models.Model):
     SELECT_TYPES = (
         ('請負','請負'),
-        ('乗用', '乗用'),
+        ('常用', '常用'),
     )
     PAYMENT_TYPES = (
         ('現金','現金'),
