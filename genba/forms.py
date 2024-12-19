@@ -87,7 +87,7 @@ class DailyReportForm(forms.ModelForm):
         )
 	SELECT_TYPES = (
         ('請負','請負'),
-        ('常用', '常用'),
+        ('常傭', '常傭'),
     )
 	created_by = forms.Select(attrs={"class":"form-select mb-4 p-2 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300"}),
 	genba = forms.Select(attrs={"class":"form-select mb-4 p-2 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300"}),
