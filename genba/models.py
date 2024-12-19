@@ -75,10 +75,6 @@ class Notification(models.Model):
         return f"{self.content} - {self.author} - {self.created_at}"
 
 class DailyReport(models.Model):
-    SELECT_TYPES = (
-        ('請負','請負'),
-        ('常傭', '常傭'),
-    )
     PAYMENT_TYPES = (
         ('現金','現金'),
         ('カード', 'カード'),
@@ -90,6 +86,10 @@ class DailyReport(models.Model):
         ('日勤','日勤'),
         ('夜勤', '夜勤'),
         )
+    SELECT_TYPES = (
+        ('請負','請負'),
+        ('常傭', '常傭'),
+    )
     genba = models.ForeignKey(Genba, related_name="genba", on_delete=models.CASCADE)
     workers = models.ManyToManyField(Profile, related_name="workers", blank=True)
     distance = models.CharField("距離", max_length=10)

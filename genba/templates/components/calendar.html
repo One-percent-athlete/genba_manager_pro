@@ -6,17 +6,16 @@
 
 <style>
     #calendar {
-        font-size: 15px;
+        font-size: 16px;
+    }
+
+    @media (max-width: 768px) {
+        #calendar {
+            font-size: 10px;
+            /* Smaller font size for mobile */
+        }
     }
 </style>
-
-<!-- #calendar .fc-day-header {
-font-size: 18px;
-}
-
-#calendar .fc-daygrid-event-title {
-font-size: 16px;
-} -->
 
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
 <script>
