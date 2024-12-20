@@ -75,13 +75,13 @@
                         休憩時間
                     </th>
                     <th scope="col" class="px-6 py-3">
+                        走行距離数
+                    </th>
+                    <th scope="col" class="px-6 py-3">
                         高速道路乗り
                     </th>
                     <th scope="col" class="px-6 py-3">
                         高速道路降り
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        走行距離数
                     </th>
                     <th scope="col" class="px-6 py-3">
                         高速支払い方法
@@ -162,15 +162,15 @@
                     {{ report.break_time }}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
+                    {{ report.distance }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
                     {% if report.highway_start %}
                     {{ report.highway_start }} から
                     {% endif %}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
                     {{ report.highway_end }}
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                    {{ report.distance }}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
                     {% if report.highway_payment %}
@@ -265,13 +265,13 @@
                         休憩時間
                     </th>
                     <th scope="col" class="px-6 py-3">
+                        走行距離数
+                    </th>
+                    <th scope="col" class="px-6 py-3">
                         高速道路乗り
                     </th>
                     <th scope="col" class="px-6 py-3">
                         高速道路降り
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        走行距離数
                     </th>
                     <th scope="col" class="px-6 py-3">
                         高速支払い方法
@@ -352,15 +352,15 @@
                     {{ report.break_time }}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
+                    {{ report.distance }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
                     {% if report.highway_start %}
                     {{ report.highway_start }} から
                     {% endif %}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
                     {{ report.highway_end }}
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                    {{ report.distance }}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
                     {% if report.highway_payment %}
