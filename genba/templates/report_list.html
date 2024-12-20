@@ -81,6 +81,9 @@
                         高速道路降り
                     </th>
                     <th scope="col" class="px-6 py-3">
+                        走行距離数
+                    </th>
+                    <th scope="col" class="px-6 py-3">
                         高速支払い方法
                     </th>
                     <th scope="col" class="px-6 py-3">
@@ -165,6 +168,9 @@
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
                     {{ report.highway_end }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    {{ report.distance }}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
                     {% if report.highway_payment %}
@@ -265,6 +271,9 @@
                         高速道路降り
                     </th>
                     <th scope="col" class="px-6 py-3">
+                        走行距離数
+                    </th>
+                    <th scope="col" class="px-6 py-3">
                         高速支払い方法
                     </th>
                     <th scope="col" class="px-6 py-3">
@@ -349,6 +358,9 @@
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
                     {{ report.highway_end }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    {{ report.distance }}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
                     {% if report.highway_payment %}
