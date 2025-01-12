@@ -338,7 +338,7 @@ def export_csv(request):
     writer = csv.writer(response)
     daily_report_list = DailyReport.objects.filter(date_created__contains=date_time)
     if daily_report_list:
-        writer.writerow(["作成日", "作業日", "作成者", "現場名", "取引先", "建退共", "作業員","人数", "シフト", "場所", "開始時間", "終了時間", "休憩時間", "走行距離数", "高速道路乗り", "高速道路降り", "高速支払い方法", "駐車場料金", "宿泊料金", "その他支払い", "建替人", "作業内容", "連絡事項"])
+        writer.writerow(["作成日", "作業日", "作成者", "現場名", "取引先", "建退共", "作業員", "人数", "シフト", "場所", "開始時間", "終了時間", "休憩時間", "走行距離数", "高速道路乗り", "高速道路降り", "高速支払い方法", "駐車場料金", "宿泊料金", "その他支払い", "建替人", "作業内容", "連絡事項"])
         for report in daily_report_list:
             attendees = []
             for a in report.workers.all():
