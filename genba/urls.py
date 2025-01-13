@@ -3,6 +3,7 @@ from genba import views
 
 urlpatterns = [
     path('', views.home, name="home"),
+    path('sauna/', views.sauna, name="sauna"),
     path('delete_notification/<int:notification_id>/', views.delete_notification, name="delete_notification"),
     path('schedule/', views.schedule, name="schedule"),
     
