@@ -352,6 +352,5 @@ def export_csv(request):
         messages.success(request, "データがありません。")
         return redirect("report_list")
 
-@login_required(login_url='/login_user/')
 def sauna(request):
     return redirect("sauna.html")
