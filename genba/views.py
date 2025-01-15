@@ -353,4 +353,5 @@ def export_csv(request):
         return redirect("report_list")
 
 def sauna(request):
-    return render(request, "sauna.html")
+    year = now.year
+    return render(request, "sauna.html", {"year": year})
