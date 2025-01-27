@@ -122,14 +122,14 @@ class DailyReportForm(forms.ModelForm):
            }
 
 class SaunaReservationForm(forms.ModelForm):
-	CHOICE = [
+	COURSE_CHOICE = [
 		('男性', '男性'),
 		('女性', '女性'),
-	]
-	room = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'form-control w-1/5 mb-4 p-2 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300', 'placeholder':'部屋番号'}))
-	room_type = forms.ChoiceField(label="部屋タイプ", choices=CHOICE, widget=forms.RadioSelect(attrs={'class': 'form-check-input'}))
-	room_price = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'form-control w-1/5 mb-4 p-2 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300', 'placeholder':'料金'}))
-	room_note = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'form-control w-1/5 mb-4 p-2 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300', 'placeholder':'注意事項'}))
-	room_start = forms.DateTimeField(label='開始日時', widget=forms.DateTimeInput(attrs={'type': 'datetime-local', 'class':'form-control w-1/5 mb-4 p-2 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300'}))
-	room_end = forms.DateTimeField(label='終了日時', widget=forms.DateTimeInput(attrs={'type': 'datetime-local', 'class':'form-control w-1/5 mb-4 p-2 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300'}))
+	],
+	user =  forms.CharField(label="", widget=forms.TextInput(attrs={'class':'form-control mb-4 p-2 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300', 'placeholder': '代表者'})),
+	num_of_people =  forms.CharField(label="", widget=forms.TextInput(attrs={'class':'form-control mb-4 p-2 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300', 'placeholder': '人数'})),
+	course_selected = forms.ChoiceField(label="ご利用されるコース", choices=COURSE_CHOICE, widget=forms.RadioSelect(attrs={'class': 'form-check-input'}))
+	date = forms.DateField(label="予約日", widget=forms.TimeInput(attrs={'type': 'date','class': 'mb-4 p-2 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300'}))
+	time = forms.TimeField(label="予約時間", widget=forms.TimeInput(attrs={'type': 'time','class': 'mb-4 p-2 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300'}))
+	note = forms.CharField(label="", max_length=100, required=False, widget=forms.TextInput(attrs={'class':'form-control mb-4 p-2 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300', 'placeholder':'その他ご要望'}))
 	
