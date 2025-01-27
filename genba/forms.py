@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
-from .models import Profile, Genba, DailyReport
+from .models import Profile, Genba, DailyReport, SaunaReservation
 
 class SignUpForm(UserCreationForm):
 	class Meta:
@@ -132,4 +132,8 @@ class SaunaReservationForm(forms.ModelForm):
 	date = forms.DateField(label="予約日", widget=forms.TimeInput(attrs={'type': 'date','class': 'mb-4 p-2 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300'}))
 	time = forms.TimeField(label="予約時間", widget=forms.TimeInput(attrs={'type': 'time','class': 'mb-4 p-2 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300'}))
 	note = forms.CharField(label="", max_length=100, required=False, widget=forms.TextInput(attrs={'class':'form-control mb-4 p-2 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300', 'placeholder':'その他ご要望'}))
+
+	class Meta:
+		model = SaunaReservation
+		fields = ('user', 'num_of_people', 'course_selected', 'date', 'time', 'note')
 	
