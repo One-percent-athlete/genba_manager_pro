@@ -128,6 +128,7 @@ class DailyReport(models.Model):
 class SaunaReservation(models.Model):
     user =  models.CharField("代表者", max_length=10)
     num_of_people =  models.CharField("利用人数", max_length=10)
+    course_selected = models.CharField("コース", max_length=50)
     date = models.DateField("日付")
     time = models.TimeField("時間")
     note = models.CharField("備考", max_length=255, blank=True)

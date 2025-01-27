@@ -120,4 +120,16 @@ class DailyReportForm(forms.ModelForm):
 			'paid_by': '建替人',
 			'kentaikyo':'建退共',
            }
-		
+
+class SaunaReservationForm(forms.ModelForm):
+	CHOICE = [
+		('男性', '男性'),
+		('女性', '女性'),
+	]
+	room = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'form-control w-1/5 mb-4 p-2 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300', 'placeholder':'部屋番号'}))
+	room_type = forms.ChoiceField(label="部屋タイプ", choices=CHOICE, widget=forms.RadioSelect(attrs={'class': 'form-check-input'}))
+	room_price = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'form-control w-1/5 mb-4 p-2 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300', 'placeholder':'料金'}))
+	room_note = forms.CharField(label="", widget=forms.TextInput(attrs={'class':'form-control w-1/5 mb-4 p-2 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300', 'placeholder':'注意事項'}))
+	room_start = forms.DateTimeField(label='開始日時', widget=forms.DateTimeInput(attrs={'type': 'datetime-local', 'class':'form-control w-1/5 mb-4 p-2 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300'}))
+	room_end = forms.DateTimeField(label='終了日時', widget=forms.DateTimeInput(attrs={'type': 'datetime-local', 'class':'form-control w-1/5 mb-4 p-2 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300'}))
+	
