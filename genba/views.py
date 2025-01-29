@@ -371,3 +371,4 @@ def sauna_reservation(request):
         return render(request, "sauna/sauna_reservation.html", {
             "form": form
         })
+
