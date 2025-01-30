@@ -11,7 +11,7 @@ import datetime
 now = datetime.datetime.now()
 
 from .models import Profile, Genba, Notification, DailyReport
-from .forms import SaunaReservationForm, SignUpForm, UserProfileForm, GenbaForm, DailyReportForm
+from .forms import SignUpForm, UserProfileForm, GenbaForm, DailyReportForm
 
 # 現場一覧をまとめる 日付を分けると大変
 
@@ -356,19 +356,18 @@ def sauna(request):
     year = now.year
     return render(request, "sauna/sauna.html", {"year": year})
 
-def sauna_reservation(request):
-    form = SaunaReservationForm()
-    if request.method == "POST":
-        form = SaunaReservationForm(request.POST or None)
-        if form.is_valid():
-            form.save()
-            messages.success(request, ("予約が完了いたしました。"))
-            return redirect("sauna_reservation")
-        else:
-            messages.success(request, ("再度お試しください。"))
-            return redirect("sauna_reservation")
-    else:
-        return render(request, "sauna/sauna_reservation.html", {
-            "form": form
-        })
-
+# def sauna_reservation(request):
+#     form = SaunaReservationForm()
+#     if request.method == "POST":
+#         form = SaunaReservationForm(request.POST or None)
+#         if form.is_valid():
+#             form.save()
+#             messages.success(request, ("予約が完了いたしました。"))
+#             return redirect("sauna_reservation")
+#         else:
+#             messages.success(request, ("再度お試しください。"))
+#             return redirect("sauna_reservation")
+#     else:
+#         return render(request, "sauna/sauna_reservation.html", {
+#             "form": form
+#         })
