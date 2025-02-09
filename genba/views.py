@@ -356,6 +356,10 @@ def sauna(request):
     year = now.year
     return render(request, "sauna/sauna.html", {"year": year})
 
+def sauna_note(request):
+    year = now.year
+    return render(request, "sauna/sauna_note.html", {"year": year})
+
 # def sauna_reservation(request):
 #     form = SaunaReservationForm()
 #     if request.method == "POST":
