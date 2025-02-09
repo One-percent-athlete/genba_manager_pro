@@ -358,7 +358,7 @@ def sauna(request):
     return render(request, "sauna/sauna.html", {"year": year})
 
 def sauna_note(request, filename):
-    storage = FileSystemStorage(location='/static/sauna/note.pdf') # Change this to the path where your PDF files are stored
+    storage = FileSystemStorage(location='C:/Projects/genba_manager_pro/static/sauna/') # Change this to the path where your PDF files are stored
     file_path = storage.path(filename)
 
     with open(file_path, 'rb') as pdf_file:
@@ -368,8 +368,8 @@ def sauna_note(request, filename):
         response['Content-Disposition'] = f'inline; filename="{filename}"'
 
         return response
-    year = now.year
-    return render(request, "sauna/sauna_note.html", {"year": year})
+    # year = now.year
+    # return render(request, "sauna/sauna_note.html", {"year": year})
     
 
 # def sauna_reservation(request):
