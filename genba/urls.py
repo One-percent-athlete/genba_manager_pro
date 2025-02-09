@@ -5,7 +5,7 @@ urlpatterns = [
     path('', views.home, name="home"),
 
     path('sauna/', views.sauna, name="sauna"),
-    path('sauna/sauna_note/', views.sauna_note, name="sauna_note"),
+    path('sauna/<filename>/', views.sauna_note, name="sauna_note"),
     # path('sauna/sauna_reservation/', views.sauna_reservation, name="sauna_reservation"),
 
     path('delete_notification/<int:notification_id>/', views.delete_notification, name="delete_notification"),

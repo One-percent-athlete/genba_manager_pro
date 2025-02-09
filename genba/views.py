@@ -2,7 +2,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.utils.safestring import mark_safe
-from django.http import HttpResponse
+from django.http import HttpResponse, FileResponse
+from django.core.files.storage import FileSystemStorage
 from django.contrib import messages
 from django.contrib.auth.models import User
 import calendar
@@ -356,9 +357,20 @@ def sauna(request):
     year = now.year
     return render(request, "sauna/sauna.html", {"year": year})
 
-def sauna_note(request):
+def sauna_note(request, filename):
+    storage = FileSystemStorage(location='/static/sauna/note.pdf') # Change this to the path where your PDF files are stored
+    file_path = storage.path(filename)
+
+    with open(file_path, 'rb') as pdf_file:
+
+        response = FileResponse(pdf_file, content_type='application/pdf')
+
+        response['Content-Disposition'] = f'inline; filename="{filename}"'
+
+        return response
     year = now.year
     return render(request, "sauna/sauna_note.html", {"year": year})
+    
 
 # def sauna_reservation(request):
 #     form = SaunaReservationForm()
