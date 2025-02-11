@@ -372,17 +372,16 @@ def sauna(request):
 #     year = now.year
 #     return render(request, "sauna/sauna_note.html", {"year": year})
 
-def sauna_note(request, filename=None):
+def sauna_note(request):
     year = now.year
+    filename = request.GET.get('filename', None)  # Get filename from query parameter
 
-    if filename:
+    if filename:  # Serve PDF
         storage = FileSystemStorage(location='C:/Projects/genba_manager_pro/static/sauna/')
         file_path = storage.path(filename)
 
         if os.path.exists(file_path):
             try:
-                # The crucial fix: Use open() with a 'with' statement, but wrap FileResponse
-                # in a lambda function to defer file access
                 with open(file_path, 'rb') as pdf_file:
                     response = FileResponse(pdf_file, content_type='application/pdf')
                     response['Content-Disposition'] = f'inline; filename="{filename}"'
@@ -395,7 +394,7 @@ def sauna_note(request, filename=None):
         else:
             return render(request, "sauna/sauna_note.html", {"year": year, "error": "PDF not found."})
 
-    else:
+    else:  # Show sauna_note.html (no filename)
         return render(request, "sauna/sauna_note.html", {"year": year})
 
 # def sauna_note(request, filename=None):
