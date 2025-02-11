@@ -372,12 +372,6 @@ def sauna(request):
 #     year = now.year
 #     return render(request, "sauna/sauna_note.html", {"year": year})
 
-from django.shortcuts import render
-from django.http import FileResponse
-from django.core.files.storage import FileSystemStorage
-from django.utils.timezone import now
-import os
-
 def sauna_note(request, filename=None):
     year = now.year
 
