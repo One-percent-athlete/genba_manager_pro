@@ -8,6 +8,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 import calendar
 import csv, urllib
+import os
 import datetime
 now = datetime.datetime.now()
 
@@ -357,19 +358,39 @@ def sauna(request):
     year = now.year
     return render(request, "sauna/sauna.html", {"year": year})
 
-def sauna_note(request, filename):
-    storage = FileSystemStorage(location='C:/Projects/genba_manager_pro/static/sauna/') # Change this to the path where your PDF files are stored
-    file_path = storage.path(filename)
+# def sauna_note(request, filename):
+#     storage = FileSystemStorage(location='C:/Projects/genba_manager_pro/static/sauna/') # Change this to the path where your PDF files are stored
+#     file_path = storage.path(filename)
 
-    with open(file_path, 'rb') as pdf_file:
+#     with open(file_path, 'rb') as pdf_file:
 
-        response = FileResponse(pdf_file, content_type='application/pdf')
+#         response = FileResponse(pdf_file, content_type='application/pdf')
 
-        response['Content-Disposition'] = f'inline; filename="{filename}"'
+#         response['Content-Disposition'] = f'inline; filename="{filename}"'
 
-        return response
-    # year = now.year
-    # return render(request, "sauna/sauna_note.html", {"year": year})
+#         return response
+#     year = now.year
+#     return render(request, "sauna/sauna_note.html", {"year": year})
+def sauna_note(request, filename=None):  # Make filename optional
+    year = now.year
+
+    if filename:  # Check if a filename is provided (PDF request)
+        storage = FileSystemStorage(location='C:/Projects/genba_manager_pro/static/sauna/')
+        file_path = storage.path(filename)
+
+        if os.path.exists(file_path): # Check if the file exists
+            try:
+                with open(file_path, 'rb') as pdf_file:
+                    response = FileResponse(pdf_file, content_type='application/pdf')
+                    response['Content-Disposition'] = f'inline; filename="{filename}"'  # Or 'attachment;' for download
+                    return response
+            except Exception as e: # Handle potential errors (e.g., file not found)
+                print(f"Error serving PDF: {e}") # Log the error for debugging
+                return render(request, "sauna/sauna_note.html", {"year": year, "error": "Error opening PDF."}) # Show error message
+        else:
+            return render(request, "sauna/sauna_note.html", {"year": year, "error": "PDF not found."}) # Show error message
+    else:  # No filename provided (initial page load)
+        return render(request, "sauna/sauna_note.html", {"year": year})
     
 
 # def sauna_reservation(request):
