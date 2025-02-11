@@ -381,26 +381,52 @@ def sauna_note(request, filename=None):
 
         if os.path.exists(file_path):
             try:
-                # Key change: Open the file in binary read mode ('rb') *without* using 'with'
-                pdf_file = open(file_path, 'rb')  # Keep the file open
-
-                response = FileResponse(pdf_file, content_type='application/pdf')
-                response['Content-Disposition'] = f'inline; filename="{filename}"'
-
-                return response  # Return the response *before* closing the file
+                # The crucial fix: Use open() with a 'with' statement, but wrap FileResponse
+                # in a lambda function to defer file access
+                with open(file_path, 'rb') as pdf_file:
+                    response = FileResponse(pdf_file, content_type='application/pdf')
+                    response['Content-Disposition'] = f'inline; filename="{filename}"'
+                    return response
 
             except Exception as e:
                 print(f"Error serving PDF: {e}")
                 return render(request, "sauna/sauna_note.html", {"year": year, "error": "Error opening PDF."})
-            finally: # Ensure file is closed even in error
-                if 'pdf_file' in locals() and pdf_file and not pdf_file.closed:
-                    pdf_file.close() # Close the file in a finally block
 
         else:
             return render(request, "sauna/sauna_note.html", {"year": year, "error": "PDF not found."})
 
     else:
         return render(request, "sauna/sauna_note.html", {"year": year})
+
+# def sauna_note(request, filename=None):
+#     year = now.year
+
+#     if filename:
+#         storage = FileSystemStorage(location='C:/Projects/genba_manager_pro/static/sauna/')
+#         file_path = storage.path(filename)
+
+#         if os.path.exists(file_path):
+#             try:
+#                 # Key change: Open the file in binary read mode ('rb') *without* using 'with'
+#                 pdf_file = open(file_path, 'rb')  # Keep the file open
+
+#                 response = FileResponse(pdf_file, content_type='application/pdf')
+#                 response['Content-Disposition'] = f'inline; filename="{filename}"'
+
+#                 return response  # Return the response *before* closing the file
+
+#             except Exception as e:
+#                 print(f"Error serving PDF: {e}")
+#                 return render(request, "sauna/sauna_note.html", {"year": year, "error": "Error opening PDF."})
+#             finally: # Ensure file is closed even in error
+#                 if 'pdf_file' in locals() and pdf_file and not pdf_file.closed:
+#                     pdf_file.close() # Close the file in a finally block
+
+#         else:
+#             return render(request, "sauna/sauna_note.html", {"year": year, "error": "PDF not found."})
+
+#     else:
+#         return render(request, "sauna/sauna_note.html", {"year": year})
 # def sauna_note(request, filename=None):  # Make filename optional
     # year = now.year
 
